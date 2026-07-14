@@ -229,12 +229,11 @@
         title: "Можно начинать",
         icon: "✓",
         statement: "подходит для первого внедрения в Трекере",
-        listTitle: "Почему",
-        reasons: readyReasons,
+        listTitle: null,
+        reasons: [],
         next: `
           Поговорите с участниками процесса и разберите последний реальный случай.<br />
-          Затем нарисуйте текущую схему работы — после этого маршрут можно
-          <br class="ready-break" />переносить в Трекер.
+          Затем нарисуйте текущую схему работы — после этого маршрут можно переносить в Трекер.
         `,
       },
       refine: {
@@ -280,12 +279,14 @@
           Процесс <strong>«${safeName}»</strong> ${content.statement}
         </div>
 
-        <div class="result-section">
-          <h2>${content.listTitle}</h2>
-          <ul class="reason-list">
-            ${content.reasons.map((reason) => `<li>${reason}</li>`).join("")}
-          </ul>
-        </div>
+        ${content.listTitle ? `
+          <div class="result-section">
+            <h2>${content.listTitle}</h2>
+            <ul class="reason-list">
+              ${content.reasons.map((reason) => `<li>${reason}</li>`).join("")}
+            </ul>
+          </div>
+        ` : ""}
 
         <div class="result-section next-section">
           <h2>Что делать дальше</h2>
