@@ -912,14 +912,14 @@ button {
     display: none;
   }
 
-  html.is-mobile-embedded .mobile-launch {
-    display: grid;
-    gap: 0;
-    width: min(100%, 360px);
-    margin: 0 auto;
-    padding: 16px;
-    text-align: center;
-  }
+html.is-mobile-embedded .mobile-launch {
+  display: grid;
+  gap: 0;
+  width: min(100%, 360px);
+  margin: 0 auto;
+  padding: 40px 16px 16px;
+  text-align: center;
+}
 
   .mobile-launch-text {
     margin: 0;

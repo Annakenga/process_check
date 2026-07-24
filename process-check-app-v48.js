@@ -185,7 +185,27 @@
     };
   };
 
-  const textWithBreaks = (value) => escapeHtml(value).replace(/\n/g, "<br />");
+const textWithBreaks = (value) => {
+  const normalized = isMobileStandalone
+    ? String(value).replace(/\n+/g, " ")
+    : String(value);
+
+  return escapeHtml(normalized).replace(/\n/g, "<br />");
+};
+
+const resultTitle = (content) => {
+  if (!isMobileStandalone) return escapeHtml(content.title);
+
+  if (content.kind === "ready") {
+    return "Подходит<br />для первого<br />внедрения";
+  }
+
+  if (content.kind === "not-ready") {
+    return "Пока<br />не подходит";
+  }
+
+  return escapeHtml(content.title);
+};
 
   const mobileQuestionText = (value) => {
     if (!isMobileStandalone) return value;
@@ -300,7 +320,7 @@
         ${logo()}
         <header class="result-header">
           <span class="result-icon" aria-hidden="true">${content.icon}</span>
-          <h1>${content.title}</h1>
+        <h1>${resultTitle(content)}</h1>
         </header>
 
         <div class="result-section result-feedback">
