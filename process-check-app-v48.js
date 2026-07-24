@@ -2,6 +2,14 @@
   "use strict";
 
   const root = document.querySelector("#app");
+  const query = new URLSearchParams(window.location.search);
+  const isMobileStandalone =
+    query.get("mobile") === "1" &&
+    window.matchMedia("(max-width: 700px)").matches;
+
+  if (isMobileStandalone) {
+    document.documentElement.classList.add("is-mobile-standalone");
+  }
 
   const questions = [
     {
@@ -37,7 +45,7 @@
   ];
 
   const state = {
-    screen: "start",
+    screen: isMobileStandalone ? "name" : "start",
     processName: "",
     questionIndex: 0,
     answers: Array(questions.length).fill(null),
@@ -179,6 +187,14 @@
 
   const textWithBreaks = (value) => escapeHtml(value).replace(/\n/g, "<br />");
 
+  const mobileQuestionText = (value) => {
+    if (!isMobileStandalone) return value;
+
+    return value
+      .replace(/<br\s*\/?\s*>/gi, " ")
+      .replace(/(^|[\s(«—–-])([авикосуя])\s+/gi, "$1$2&nbsp;");
+  };
+
   const startScreen = () => `
     <div class="screen-content start-content">
       ${logo()}
@@ -242,8 +258,8 @@
         </div>
 
         <div class="question-copy">
-          <h1>${question.title}</h1>
-          <p>${question.description}</p>
+          <h1>${mobileQuestionText(question.title)}</h1>
+          <p>${mobileQuestionText(question.description)}</p>
         </div>
 
         <div class="answer-group" role="radiogroup" aria-label="${question.title}">

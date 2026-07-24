@@ -914,7 +914,7 @@ button {
 
   html.is-mobile-embedded .mobile-launch {
     display: grid;
-    gap: 12px;
+    gap: 0;
     width: min(100%, 360px);
     margin: 0 auto;
     padding: 16px;
@@ -947,6 +947,69 @@ button {
   .mobile-launch-button:hover,
   .mobile-launch-button:active {
     background: #ff5419;
+  }
+
+  /* Отдельный полноэкранный сценарий для смартфона. Все правила намеренно
+     привязаны к mobile=1 и не влияют на полную десктопную версию. */
+  html.is-mobile-standalone,
+  html.is-mobile-standalone body,
+  html.is-mobile-standalone .page-shell,
+  html.is-mobile-standalone .process-card {
+    width: 100%;
+    min-height: 100svh;
+    height: 100svh;
+  }
+
+  html.is-mobile-standalone body {
+    overflow: hidden;
+  }
+
+  html.is-mobile-standalone .page-shell {
+    padding: 0;
+  }
+
+  html.is-mobile-standalone .process-card {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  html.is-mobile-standalone .form-content,
+  html.is-mobile-standalone .question-content,
+  html.is-mobile-standalone .result-content,
+  html.is-mobile-standalone .result-refine,
+  html.is-mobile-standalone .result-ready,
+  html.is-mobile-standalone .result-not-ready {
+    min-height: 100svh;
+    height: 100svh;
+    justify-content: center;
+    padding-top: max(42px, env(safe-area-inset-top));
+    padding-bottom: max(42px, env(safe-area-inset-bottom));
+  }
+
+  html.is-mobile-standalone .form-content {
+    justify-content: center;
+  }
+
+  html.is-mobile-standalone .form-content h1 {
+    margin-top: 0;
+  }
+
+  html.is-mobile-standalone .question-content {
+    --question-copy-gap: 22px;
+  }
+
+  html.is-mobile-standalone .question-copy {
+    margin-top: clamp(54px, 7svh, 82px);
+  }
+
+  html.is-mobile-standalone .answer-group {
+    margin-top: var(--question-copy-gap);
+  }
+
+  html.is-mobile-standalone .result-button {
+    margin-top: clamp(40px, 5svh, 62px);
+    margin-bottom: 0;
   }
 }
 
