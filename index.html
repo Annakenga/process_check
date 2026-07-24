@@ -9,7 +9,15 @@
     />
     <title>Процесс-чек</title>
     <link rel="icon" href="./public/tracker-logo.png" />
-    <link rel="stylesheet" href="./process-check-styles-v47.css" />
+    <script>
+      if (
+        window.top !== window &&
+        window.matchMedia("(max-width: 700px)").matches
+      ) {
+        document.documentElement.classList.add("is-mobile-embedded");
+      }
+    </script>
+    <link rel="stylesheet" href="./process-check-styles-v48.css" />
     <style>
       @font-face {
         font-family: "Inter Variable";
@@ -30,6 +38,20 @@
   </head>
   <body>
     <div id="app"></div>
-    <script src="./process-check-app-v47.js" defer></script>
+    <div
+      class="mobile-launch"
+      aria-label="Открыть Процесс-чек на отдельной странице"
+    >
+      <p class="mobile-launch-text">
+        Уже присмотрели процесс для первого внедрения?
+      </p>
+      <a
+        class="mobile-launch-button"
+        href="./?mobile=1&amp;v=48"
+        target="_blank"
+        rel="noopener"
+      >Проверить процесс</a>
+    </div>
+    <script src="./process-check-app-v48.js" defer></script>
   </body>
 </html>
